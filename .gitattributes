@@ -1,0 +1,5 @@
+# Set text files to use LF line endings on checkout.
+* text=auto
+
+# Declare files that will always have CRLF line endings on checkout.
+*.php text eol=crlf
