@@ -69,7 +69,8 @@ Route::post('add-comment', 'api\ApidetProducController@addcomment');
 Route::post('add-favourites', 'api\ApidetProducController@addfav')->middleware('CustomerAuth');
 Route::get('favourites', 'api\ApiProductsController@favourites')->middleware('CustomerAuth');
 Route::post('add-produt', 'api\ApidetProducController@order');
-Route::get('get-product-detials', 'api\ApidetProducController@getProductDet');
+
+Route::get('data/get-product-detials', [ApidetProducController::class, 'dataproductinarray']);
 
 Route::get('cart', 'api\ApidetProducController@cart');
 

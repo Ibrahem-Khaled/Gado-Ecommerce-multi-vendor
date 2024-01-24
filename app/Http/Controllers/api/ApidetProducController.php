@@ -735,7 +735,7 @@ class ApidetProducController extends Controller
                 $order->save();
             }
         } else {
-            $order = Order::where('ip', $request->ip())->where('status', '1')->with('Carts')->latest()->first();
+            $order = Order::where('ip', $request->ip)->where('status', '1')->with('Carts')->latest()->first();
             if ($order) {
                 $product = Product::where('id', $request->id)->latest()->first();
                 // Here Check For Quantity
@@ -754,7 +754,6 @@ class ApidetProducController extends Controller
                             return response()->json(['message' => 'User Wants Quantity more than product stock'], 200);
                         }
                     }
-
 
                     if ($product->stock >= $request->count):
                         $checkIfProductExistsInCart->count = $checkIfProductExistsInCart->count + $request->count;
@@ -779,7 +778,7 @@ class ApidetProducController extends Controller
 
             } else {
                 $order = new Order;
-                $order->ip = $request->ip();
+                $order->ip = $request->ip;
                 $order->status = 1;
                 $order->customer_type = 'c';
                 $order->total = 0;
@@ -852,10 +851,10 @@ class ApidetProducController extends Controller
             $order = Order::where('customer_id', $user_id)->where('status', '1')->with('Carts.Product', 'OrderProducts.Product')->latest()->first();
 
         } else {
-            $order = Order::where('ip', $request->ip())->where('status', '1')->with('Carts.Product', 'OrderProducts.Product')->latest()->first();
+            $order = Order::where('ip', $request->ip)->where('status', '1')->with('Carts.Product', 'OrderProducts.Product')->latest()->first();
         }
 
-
+        
         if (!$order) {
             $list['order_id'] = 0;
             $list['order_total'] = 0;
@@ -2560,7 +2559,7 @@ class ApidetProducController extends Controller
         ], 200);
     }
 
-    public function getProductDet(Request $request)
+    public function dataproductinarray(Request $request)
     {
         $productId = $request->id;
 
